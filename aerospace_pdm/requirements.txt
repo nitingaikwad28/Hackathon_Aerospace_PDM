@@ -1,0 +1,3 @@
+# Only two libraries are needed - both are very common and lightweight.
+numpy>=1.24        # math / arrays / linear algebra (used for our simple RUL model)
+pandas>=2.0         # tables (loading, grouping, and saving sensor data as CSV)

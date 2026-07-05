@@ -1,0 +1,167 @@
+[
+  {
+    "work_order_id": "WO-AC-004-landing_gear-14-163",
+    "aircraft_id": "AC-004",
+    "component": "landing_gear",
+    "unit_id": "AC-004-landing_gear-14",
+    "predicted_RUL_cycles": 20.8,
+    "anomaly_detected": true,
+    "priority": "Critical",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Immediate inspection and maintenance"
+  },
+  {
+    "work_order_id": "WO-AC-008-landing_gear-30-189",
+    "aircraft_id": "AC-008",
+    "component": "landing_gear",
+    "unit_id": "AC-008-landing_gear-30",
+    "predicted_RUL_cycles": 38.1,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-007-engine-25-231",
+    "aircraft_id": "AC-007",
+    "component": "engine",
+    "unit_id": "AC-007-engine-25",
+    "predicted_RUL_cycles": 58.6,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-005-landing_gear-18-163",
+    "aircraft_id": "AC-005",
+    "component": "landing_gear",
+    "unit_id": "AC-005-landing_gear-18",
+    "predicted_RUL_cycles": 67.7,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-001-brakes-3-193",
+    "aircraft_id": "AC-001",
+    "component": "brakes",
+    "unit_id": "AC-001-brakes-3",
+    "predicted_RUL_cycles": 80.0,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-007-bogie-28-194",
+    "aircraft_id": "AC-007",
+    "component": "bogie",
+    "unit_id": "AC-007-bogie-28",
+    "predicted_RUL_cycles": 88.1,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-006-bogie-24-181",
+    "aircraft_id": "AC-006",
+    "component": "bogie",
+    "unit_id": "AC-006-bogie-24",
+    "predicted_RUL_cycles": 96.6,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-004-engine-13-94",
+    "aircraft_id": "AC-004",
+    "component": "engine",
+    "unit_id": "AC-004-engine-13",
+    "predicted_RUL_cycles": 98.2,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-003-bogie-12-136",
+    "aircraft_id": "AC-003",
+    "component": "bogie",
+    "unit_id": "AC-003-bogie-12",
+    "predicted_RUL_cycles": 105.9,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-001-bogie-4-120",
+    "aircraft_id": "AC-001",
+    "component": "bogie",
+    "unit_id": "AC-001-bogie-4",
+    "predicted_RUL_cycles": 109.5,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-003-brakes-11-99",
+    "aircraft_id": "AC-003",
+    "component": "brakes",
+    "unit_id": "AC-003-brakes-11",
+    "predicted_RUL_cycles": 110.8,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-008-brakes-31-117",
+    "aircraft_id": "AC-008",
+    "component": "brakes",
+    "unit_id": "AC-008-brakes-31",
+    "predicted_RUL_cycles": 111.0,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-008-engine-29-43",
+    "aircraft_id": "AC-008",
+    "component": "engine",
+    "unit_id": "AC-008-engine-29",
+    "predicted_RUL_cycles": 111.8,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-001-engine-1-61",
+    "aircraft_id": "AC-001",
+    "component": "engine",
+    "unit_id": "AC-001-engine-1",
+    "predicted_RUL_cycles": 116.5,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  },
+  {
+    "work_order_id": "WO-AC-003-engine-9-67",
+    "aircraft_id": "AC-003",
+    "component": "engine",
+    "unit_id": "AC-003-engine-9",
+    "predicted_RUL_cycles": 119.3,
+    "anomaly_detected": true,
+    "priority": "Warning",
+    "created_at": "2026-07-05T19:31:50",
+    "recommended_action": "Schedule maintenance during next planned downtime"
+  }
+]
