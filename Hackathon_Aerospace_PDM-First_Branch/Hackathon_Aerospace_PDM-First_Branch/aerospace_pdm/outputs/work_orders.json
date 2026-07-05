@@ -7,7 +7,7 @@
     "predicted_RUL_cycles": 20.8,
     "anomaly_detected": true,
     "priority": "Critical",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Immediate inspection and maintenance"
   },
   {
@@ -18,7 +18,7 @@
     "predicted_RUL_cycles": 38.1,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -29,7 +29,7 @@
     "predicted_RUL_cycles": 58.6,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -40,7 +40,7 @@
     "predicted_RUL_cycles": 67.7,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -51,7 +51,7 @@
     "predicted_RUL_cycles": 80.0,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -62,7 +62,7 @@
     "predicted_RUL_cycles": 88.1,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -73,7 +73,7 @@
     "predicted_RUL_cycles": 96.6,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -84,7 +84,7 @@
     "predicted_RUL_cycles": 98.2,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -95,7 +95,7 @@
     "predicted_RUL_cycles": 105.9,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -106,7 +106,7 @@
     "predicted_RUL_cycles": 109.5,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -117,7 +117,7 @@
     "predicted_RUL_cycles": 110.8,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -128,7 +128,7 @@
     "predicted_RUL_cycles": 111.0,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -139,7 +139,7 @@
     "predicted_RUL_cycles": 111.8,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -150,7 +150,7 @@
     "predicted_RUL_cycles": 116.5,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   },
   {
@@ -161,7 +161,7 @@
     "predicted_RUL_cycles": 119.3,
     "anomaly_detected": true,
     "priority": "Warning",
-    "created_at": "2026-07-05T22:06:03",
+    "created_at": "2026-07-05T19:31:50",
     "recommended_action": "Schedule maintenance during next planned downtime"
   }
 ]

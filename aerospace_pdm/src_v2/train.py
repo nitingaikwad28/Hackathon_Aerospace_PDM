@@ -3,7 +3,7 @@
 # occasional model training from fast, frequent model serving (predict_service.py).
 # Run this whenever you have new historical data to retrain on; it saves everything
 # predict_service.py needs into artifacts/, and never has to run again until the
-# next retraining cycle.
+# next retraining cycle. Requires scikit-learn + joblib (see requirements_v2.txt).
 
 import json
 import time
@@ -15,8 +15,8 @@ from rul_model_v2 import train_rul_models, predict_rul, evaluate as evaluate_rul
 from evaluation_v2 import evaluate_anomaly_detection, evaluate_rul_by_component
 from model_registry import save_models
 from config import (ARTIFACT_DIR, DATA_DIR, OUTPUT_DIR, COMPONENTS,
-                     IFOREST_N_TREES, IFOREST_SUBSAMPLE_SIZE, IFOREST_CONTAMINATION,
-                     RF_N_TREES, RF_MAX_DEPTH, RF_MIN_SAMPLES_SPLIT, RF_MIN_SAMPLES_LEAF)
+                     IFOREST_N_ESTIMATORS, IFOREST_MAX_SAMPLES, IFOREST_CONTAMINATION,
+                     RF_N_ESTIMATORS, RF_MAX_DEPTH, RF_MIN_SAMPLES_SPLIT, RF_MIN_SAMPLES_LEAF)
 
 
 def main():
@@ -61,11 +61,11 @@ def main():
 
     print("\n[5/5] Saving model artifacts + model card + benchmark report...")
     save_models(anomaly_models, "iforest", ARTIFACT_DIR,
-                hyperparameters={"n_trees": IFOREST_N_TREES, "subsample_size": IFOREST_SUBSAMPLE_SIZE,
+                hyperparameters={"n_estimators": IFOREST_N_ESTIMATORS, "max_samples": IFOREST_MAX_SAMPLES,
                                   "contamination": IFOREST_CONTAMINATION},
                 metrics=anomaly_metrics, extra={"thresholds": thresholds})
     save_models(rul_models, "rf", ARTIFACT_DIR,
-                hyperparameters={"n_trees": RF_N_TREES, "max_depth": RF_MAX_DEPTH,
+                hyperparameters={"n_estimators": RF_N_ESTIMATORS, "max_depth": RF_MAX_DEPTH,
                                   "min_samples_split": RF_MIN_SAMPLES_SPLIT, "min_samples_leaf": RF_MIN_SAMPLES_LEAF},
                 metrics={"overall": rul_overall, "by_component": rul_by_component})
 

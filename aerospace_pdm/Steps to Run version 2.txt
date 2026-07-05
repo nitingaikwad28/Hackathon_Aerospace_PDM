@@ -1,0 +1,26 @@
+Steps to run Aerospace Predictive Maintenance - v2
+====================================================
+
+Prerequisites: Python 3.10+ with pip.
+
+1. Install dependencies
+   pip install -r src_v2/requirements_v2.txt
+
+2. Move into the v2 source directory
+   cd src_v2
+
+3. Train the models (simulates the fleet, engineers features, trains
+   IsolationForest + RandomForestRegressor per component, evaluates, and
+   saves artifacts to src_v2/artifacts/)
+   python train.py
+
+4. Run the production serving entry point (loads the saved models, no
+   retraining, generates dashboard/work-order outputs)
+   python predict_service.py
+
+5. Run the unit tests
+   python -m unittest tests.test_models -v
+
+Outputs land in outputs_v2/ (dashboard_v2.html, fleet_status_v2.csv,
+model_metrics_v2.json, work_orders_v2.json) and documentation is at
+outputs_v2/code_documentation_v2.pdf.

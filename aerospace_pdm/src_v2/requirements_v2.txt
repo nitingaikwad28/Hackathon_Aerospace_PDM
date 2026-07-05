@@ -1,5 +1,6 @@
-# v2 still needs only numpy + pandas. Isolation Forest and Random Forest are
-# implemented from scratch (see models/) since this environment has no internet
-# access to install scikit-learn - see code_documentation_v2.pdf for details.
+# v2 uses real scikit-learn ensemble algorithms (IsolationForest, RandomForestRegressor)
+# and joblib for model persistence, in addition to numpy/pandas.
 numpy>=1.24
 pandas>=2.0
+scikit-learn>=1.3
+joblib>=1.3

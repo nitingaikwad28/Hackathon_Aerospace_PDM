@@ -16,20 +16,25 @@ SENSOR_COLUMNS = ["vibration", "temperature", "pressure", "oil_debris", "rpm_dev
 ROLLING_WINDOW = 5                            # trailing window size (cycles) for rolling features
 MIN_HEALTHY_ROWS = 10                          # minimum rows used to establish a part's healthy baseline
 
-# ---- Isolation Forest hyperparameters (anomaly detection) ----
-IFOREST_N_TREES = 100                          # number of isolation trees per component model
-IFOREST_SUBSAMPLE_SIZE = 256                   # rows sampled (without replacement) to build each tree
-IFOREST_MAX_DEPTH = None                        # None -> auto = ceil(log2(subsample_size))
-IFOREST_CONTAMINATION = 0.05                    # assumed fraction of anomalous rows, used to pick the score cutoff
+# ---- Isolation Forest hyperparameters (anomaly detection, scikit-learn) ----
+# Now that this runs on scikit-learn's compiled/vectorized implementation rather
+# than a pure-Python from-scratch version, we can afford a larger, more standard
+# ensemble size without the runtime cost that capped these values in v2's first pass.
+IFOREST_N_ESTIMATORS = 200                     # sklearn default is 100; 200 for extra stability
+IFOREST_MAX_SAMPLES = 256                       # rows sampled per tree ("auto" in sklearn = min(256, n))
+IFOREST_CONTAMINATION = 0.05                    # assumed fraction of anomalous rows (also used for our own
+                                                 # validation-tuned threshold, see anomaly_detection_v2.py)
+IFOREST_MAX_FEATURES = 1.0                      # fraction of features considered per tree
+IFOREST_N_JOBS = -1                             # use all available CPU cores
 IFOREST_RANDOM_SEED = 7
 
-# ---- Random Forest hyperparameters (RUL regression) ----
-RF_N_TREES = 25                                  # tuned down from sklearn-typical 100+ to keep from-scratch
-RF_MAX_DEPTH = 6                                 # numpy training fast enough for a live sandbox demo
-RF_MIN_SAMPLES_SPLIT = 20
-RF_MIN_SAMPLES_LEAF = 10
-RF_MAX_FEATURES_FRACTION = 0.6                   # fraction of features considered at each split (feature bagging)
-RF_HISTOGRAM_BINS = 8                            # candidate split thresholds per feature (histogram-based, fast)
+# ---- Random Forest hyperparameters (RUL regression, scikit-learn) ----
+RF_N_ESTIMATORS = 300                           # sklearn's C-optimized trees make a much larger forest cheap
+RF_MAX_DEPTH = 12
+RF_MIN_SAMPLES_SPLIT = 10
+RF_MIN_SAMPLES_LEAF = 4
+RF_MAX_FEATURES = "sqrt"                        # classic Random Forest feature-bagging rule of thumb
+RF_N_JOBS = -1                                  # use all available CPU cores
 RF_RANDOM_SEED = 11
 
 # ---- train / validation / test split (by unit_id, never by row) ----

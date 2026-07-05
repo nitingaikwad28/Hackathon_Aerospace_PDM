@@ -1,22 +1,19 @@
 # rul_model_v2.py
-# Production-style Remaining Useful Life (RUL) estimation: one Random Forest
-# Regressor per component type, trained on engineered rolling-window features
-# instead of raw instantaneous sensor values. Random Forests handle the very
-# different sensor scales across component types natively (tree splits don't
-# care about feature scale), are far more expressive than linear regression at
-# capturing the accelerating, non-linear wear curve, and give a feature
-# importance readout for free.
+# Production-style Remaining Useful Life (RUL) estimation: one scikit-learn
+# RandomForestRegressor per component type, trained on engineered rolling-window
+# features instead of raw instantaneous sensor values. Random Forests handle the
+# very different sensor scales across component types natively (tree splits
+# don't care about feature scale), are far more expressive than linear
+# regression at capturing the accelerating, non-linear wear curve, and give a
+# feature importance readout for free.
 
 import numpy as np
 import pandas as pd
+from sklearn.ensemble import RandomForestRegressor
 
 from features import feature_column_names
-from config import (RF_N_TREES, RF_MAX_DEPTH, RF_MIN_SAMPLES_SPLIT, RF_MIN_SAMPLES_LEAF,
-                     RF_MAX_FEATURES_FRACTION, RF_HISTOGRAM_BINS, RF_RANDOM_SEED)
-
-import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "models"))
-from random_forest import RandomForestRegressor
+from config import (RF_N_ESTIMATORS, RF_MAX_DEPTH, RF_MIN_SAMPLES_SPLIT, RF_MIN_SAMPLES_LEAF,
+                     RF_MAX_FEATURES, RF_N_JOBS, RF_RANDOM_SEED)
 
 TARGET_COLUMN = "RUL"
 
@@ -29,11 +26,15 @@ def train_rul_models(featured_train_df):
     for component, comp_df in featured_train_df.groupby("component"):
         X = comp_df[cols].values
         y = comp_df[TARGET_COLUMN].values
-        model = RandomForestRegressor(n_trees=RF_N_TREES, max_depth=RF_MAX_DEPTH,
-                                       min_samples_split=RF_MIN_SAMPLES_SPLIT,
-                                       min_samples_leaf=RF_MIN_SAMPLES_LEAF,
-                                       max_features_fraction=RF_MAX_FEATURES_FRACTION,
-                                       n_bins=RF_HISTOGRAM_BINS, random_state=RF_RANDOM_SEED)
+        model = RandomForestRegressor(
+            n_estimators=RF_N_ESTIMATORS,
+            max_depth=RF_MAX_DEPTH,
+            min_samples_split=RF_MIN_SAMPLES_SPLIT,
+            min_samples_leaf=RF_MIN_SAMPLES_LEAF,
+            max_features=RF_MAX_FEATURES,
+            n_jobs=RF_N_JOBS,
+            random_state=RF_RANDOM_SEED,
+        )
         model.fit(X, y)
         models[component] = model
     return models
@@ -49,6 +50,13 @@ def predict_rul(models, df):
             continue
         predictions[mask] = model.predict(df.loc[mask, cols].values)
     return np.clip(predictions, 0, None)          # RUL can never be negative
+
+
+def get_feature_importances(models):
+    # scikit-learn exposes this as the `feature_importances_` attribute directly
+    # (no method call needed) once a model is fitted.
+    cols = feature_column_names()
+    return {component: dict(zip(cols, model.feature_importances_)) for component, model in models.items()}
 
 
 def evaluate(y_true, y_pred):
@@ -68,7 +76,8 @@ def evaluate_by_component(df_with_predictions):
 
 
 if __name__ == "__main__":
-    # quick manual test: train on train split, evaluate on held-out test split
+    # quick manual test (run this on a machine with scikit-learn installed):
+    # train on train split, evaluate on held-out test split
     from data_simulator_v2 import simulate_fleet, split_units
     from features import add_rolling_features
 

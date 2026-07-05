@@ -1,69 +1,66 @@
-# Aerospace Predictive Maintenance - v2 (Production-Oriented)
+# Aerospace Predictive Maintenance - v2 (scikit-learn Production Architecture)
 
-A more production-ready evolution of the original hackathon MVP: a 5x larger
-simulated fleet, 5 sensor channels instead of 3, engineered rolling-window
-features, real ensemble ML algorithms (Isolation Forest + Random Forest,
-implemented from scratch in numpy since this sandbox has no internet access to
-install scikit-learn), a proper train/validation/test split, a model registry
-with saved artifacts + model cards, and a train/serve separation
-(`train.py` vs `predict_service.py`).
+A production-oriented evolution of the original hackathon MVP, now built on real
+**scikit-learn** ensemble algorithms: `IsolationForest` for anomaly detection and
+`RandomForestRegressor` for Remaining Useful Life (RUL). An earlier pass at v2 used
+from-scratch numpy implementations of these algorithms (no internet access was
+available to install scikit-learn at the time); that code has been **deleted** now
+that scikit-learn is available, so only this version remains.
 
-**The original `src/` MVP is untouched.** This is a parallel `src_v2/` project;
-`README.md` and `outputs/code_documentation.pdf` still describe the original
-version exactly as before. See `outputs/code_documentation_v2.pdf` for full
+This repository now contains only the v2 pipeline; the original from-scratch v1
+MVP has been removed. See `outputs_v2/code_documentation_v2.pdf` for full
 documentation of this version.
 
-## What changed vs. v1
+## Verified end-to-end
 
-| Aspect | v1 (`src/`) | v2 (`src_v2/`) |
-|---|---|---|
-| Fleet size | 8 aircraft, 32 parts, ~3,000 rows | 40 aircraft, 160 parts, ~16,300 rows |
-| Sensor channels | 3 (vibration, temperature, pressure) | 5 (+ oil debris, RPM deviation) |
-| Features | Raw instantaneous readings | Raw + rolling mean/std/min/max/slope (31 features) |
-| Anomaly detection | Per-unit z-score threshold | Isolation Forest per component (from scratch) |
-| RUL estimation | Linear regression per component | Random Forest Regressor per component (from scratch) |
-| Data split | Train/test by unit | Train/validation/test by unit (val tunes alert thresholds) |
-| Model lifecycle | Retrained every run inside `main.py` | `train.py` (offline) saves artifacts; `predict_service.py` (serving) loads and scores only |
-| Model persistence | None | `artifacts/*.pkl` + `artifacts/model_card.json` (version, hyperparameters, metrics, timestamp) |
-| Tests | None | `tests/test_models.py` (unittest, 7 passing tests) |
-| MRO integration | Fire-and-forget mock send | Idempotency key + simulated retry/backoff |
-
-## Benchmark comparison (representative runs)
-
-| Metric | v1 | v2 |
-|---|---|---|
-| RUL MAE (overall) | ~13.5 cycles | ~4.1 cycles |
-| RUL MAE (landing gear, weakest component) | ~21 cycles | ~5 cycles |
-| Anomaly detection algorithm | Z-score (statistics) | Isolation Forest (ML ensemble) |
-| Mean detection lead time | ~150 cycles | ~196 cycles |
-
-RUL accuracy improves substantially across every component type. Anomaly-detection
-precision/recall are measured on a much smaller absolute number of held-out test
-anomalies in v2 (a 24-unit test split vs. scoring the whole v1 fleet), so treat
-those specific figures as indicative rather than final - see the caveats in
-`code_documentation_v2.pdf`.
-
-## Running v2
+This pipeline has been run end-to-end with scikit-learn 1.9 installed: training,
+serving, and the unit test suite all complete successfully.
 
 ```bash
-pip install -r requirements_v2.txt      # numpy + pandas only
+pip install -r requirements_v2.txt
 cd src_v2
-python train.py              # offline: builds data, trains + saves models, benchmarks them
-python predict_service.py    # serving: loads saved models, scores new telemetry, builds dashboard
-python -m unittest tests.test_models -v   # run the unit tests
+python train.py
+python predict_service.py
+python -m unittest tests.test_models -v
 ```
 
-`train.py` writes to `data_v2/`, `artifacts/`, and `outputs_v2/model_metrics_v2.json`.
-`predict_service.py` (no retraining, ~3x faster than train.py) writes
-`outputs_v2/dashboard_v2.html`, `fleet_status_v2.csv`, and `work_orders_v2.json`.
+Latest verified run: test-set anomaly detection recall=0.667, early-life false
+alarm rate=0.082; RUL regression overall MAE=4.91, RMSE=9.42. All 5 unit tests
+pass. See `outputs_v2/model_metrics_v2.json` for the full benchmark report.
 
-## Why still no scikit-learn?
+## What's in src_v2/ now
 
-This sandbox environment has no outbound internet access for `pip install`, so
-`scikit-learn`, `joblib`, and similar packages cannot be installed. Isolation
-Forest and Random Forest were therefore reimplemented from scratch in numpy,
-matching the published algorithms and scikit-learn's own semantics (same
-subsampling/bagging strategy, same path-length / variance-reduction split logic).
-If deployed somewhere with normal internet access, swapping in
-`sklearn.ensemble.IsolationForest` / `RandomForestRegressor` is a drop-in
-replacement behind the same `fit`/`predict`/`score` interface used here.
+| File | Role |
+|---|---|
+| `config.py` | Central hyperparameters (now scikit-learn constructor arguments) and paths |
+| `data_simulator_v2.py` | 40-aircraft, 160-part, 5-sensor synthetic fleet + train/val/test unit split (unchanged from before) |
+| `features.py` | 31 rolling-window engineered features (unchanged from before) |
+| `anomaly_detection_v2.py` | Trains/scores one `sklearn.ensemble.IsolationForest` per component |
+| `rul_model_v2.py` | Trains/predicts with one `sklearn.ensemble.RandomForestRegressor` per component |
+| `evaluation_v2.py` | Detection lead time, false alarm rate, per-component RUL accuracy (unchanged) |
+| `model_registry.py` | Saves/loads models via `joblib` + a JSON model card |
+| `dashboard_v2.py` | Fleet health dashboard + model-performance panel (unchanged) |
+| `mro_integration_v2.py` | Mock MRO adapter with idempotency key + retry/backoff (unchanged) |
+| `train.py` | Offline training entry point |
+| `predict_service.py` | Production serving entry point (loads saved models, no retraining) |
+| `tests/test_models.py` | Unit tests for the scikit-learn-backed wrapper functions |
+
+## What changed vs. the from-scratch v2
+
+| Aspect | From-scratch v2 (deleted) | This version |
+|---|---|---|
+| Anomaly detection | Custom `_IsolationTree` / `IsolationForest` classes in numpy | `sklearn.ensemble.IsolationForest` |
+| RUL estimation | Custom `_DecisionTreeRegressor` / `RandomForestRegressor` classes in numpy | `sklearn.ensemble.RandomForestRegressor` |
+| Isolation Forest size | 100 trees | 200 trees |
+| Random Forest size | 25 trees, max_depth=6 | 300 trees, max_depth=12 |
+| Model persistence | Raw `pickle`, `.pkl` files | `joblib`, `.joblib` files |
+| Feature importance | Custom split-count proxy | Built-in `model.feature_importances_` |
+
+## Why scikit-learn
+
+Battle-tested and optimized (Cython/C, parallelized with `n_jobs=-1`), which makes
+much larger ensembles (200-300 trees vs. 25-100) practical; full ecosystem
+compatibility (joblib, hyperparameter search, model inspection tools) with no
+extra code; and significantly less custom code to maintain long-term. See
+`outputs_v2/code_documentation_v2.pdf` for the full reasoning and a complete
+file-by-file reference.
