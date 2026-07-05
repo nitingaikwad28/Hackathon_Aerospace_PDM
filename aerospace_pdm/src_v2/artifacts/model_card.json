@@ -1,0 +1,83 @@
+{
+  "iforest": {
+    "trained_at_utc": "2026-07-05T15:49:34+00:00",
+    "components": [
+      "bogie",
+      "brakes",
+      "engine",
+      "landing_gear"
+    ],
+    "hyperparameters": {
+      "n_trees": 100,
+      "subsample_size": 256,
+      "contamination": 0.05
+    },
+    "metrics": {
+      "true_positives": 2,
+      "false_positives": 499,
+      "false_negatives": 1,
+      "true_negatives": 2222,
+      "precision": 0.004,
+      "recall": 0.667,
+      "false_alarm_rate": 0.183,
+      "early_life_false_alarm_rate": 0.046,
+      "f1_score": 0.008,
+      "mean_detection_lead_time_cycles": 196.3,
+      "median_detection_lead_time_cycles": 204.0,
+      "units_flagged": 17,
+      "units_never_flagged": 7
+    },
+    "extra": {
+      "thresholds": {
+        "bogie": 0.4931178428309947,
+        "brakes": 0.5030714946997319,
+        "engine": 0.6239675350638624,
+        "landing_gear": 0.4299820764266809
+      }
+    }
+  },
+  "rf": {
+    "trained_at_utc": "2026-07-05T15:49:34+00:00",
+    "components": [
+      "bogie",
+      "brakes",
+      "engine",
+      "landing_gear"
+    ],
+    "hyperparameters": {
+      "n_trees": 25,
+      "max_depth": 6,
+      "min_samples_split": 20,
+      "min_samples_leaf": 10
+    },
+    "metrics": {
+      "overall": {
+        "MAE": 4.11,
+        "RMSE": 8.18
+      },
+      "by_component": {
+        "bogie": {
+          "MAE": 6.69,
+          "RMSE": 12.82,
+          "n_rows": 517
+        },
+        "brakes": {
+          "MAE": 2.83,
+          "RMSE": 5.5,
+          "n_rows": 453
+        },
+        "engine": {
+          "MAE": 1.43,
+          "RMSE": 2.92,
+          "n_rows": 656
+        },
+        "landing_gear": {
+          "MAE": 5.01,
+          "RMSE": 8.42,
+          "n_rows": 1098
+        }
+      }
+    },
+    "extra": {}
+  }
+}

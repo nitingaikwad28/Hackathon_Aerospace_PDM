@@ -1,0 +1,5 @@
+# v2 still needs only numpy + pandas. Isolation Forest and Random Forest are
+# implemented from scratch (see models/) since this environment has no internet
+# access to install scikit-learn - see code_documentation_v2.pdf for details.
+numpy>=1.24
+pandas>=2.0
