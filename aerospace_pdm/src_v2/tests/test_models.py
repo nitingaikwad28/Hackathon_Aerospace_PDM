@@ -59,11 +59,11 @@ class TestFeatureEngineering(unittest.TestCase):
         df = pd.DataFrame({
             "unit_id": ["u1"] * 10,
             "cycle": range(1, 11),
-            "vibration": np.linspace(0.1, 0.2, 10),
-            "temperature": np.linspace(50, 60, 10),
-            "pressure": np.linspace(100, 90, 10),
-            "oil_debris": np.linspace(1, 2, 10),
-            "rpm_deviation": np.linspace(0, 1, 10),
+            "vibration_mm_s": np.linspace(0.1, 0.2, 10),
+            "temperature_c": np.linspace(50, 60, 10),
+            "pressure_psi": np.linspace(100, 90, 10),
+            "oil_debris_ppm": np.linspace(1, 2, 10),
+            "rotational_speed_deviation_pct": np.linspace(0, 1, 10),
         })
         featured = add_rolling_features(df)
         cols = feature_column_names()

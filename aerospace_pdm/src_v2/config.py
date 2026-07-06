@@ -9,8 +9,13 @@ COMPONENTS = ["engine", "landing_gear", "brakes", "bogie"]
 MIN_LIFE, MAX_LIFE = 150, 320                 # total lifespan range (cycles) per part
 RUL_CAP = 130                                  # standard "clipped RUL" ceiling used for training
 
-# ---- sensor channels (v2 adds 2 more channels than v1's 3) ----
-SENSOR_COLUMNS = ["vibration", "temperature", "pressure", "oil_debris", "rpm_deviation"]
+# ---- sensor channels ----
+# Named and unit-tagged after real Flight Data Recorder / Engine Health Monitoring (EHM)
+# parameter conventions (ARINC 717/FAA AC 20-141B define ~88 recorded parameters on
+# real aircraft) rather than generic/unitless names - see data_simulator_v2.py for the
+# per-component physical meaning of each channel (e.g. temperature_c = EGT for engine,
+# brake/bearing temperature for the other 3 components).
+SENSOR_COLUMNS = ["vibration_mm_s", "temperature_c", "pressure_psi", "oil_debris_ppm", "rotational_speed_deviation_pct"]
 
 # ---- feature engineering ----
 ROLLING_WINDOW = 5                            # trailing window size (cycles) for rolling features

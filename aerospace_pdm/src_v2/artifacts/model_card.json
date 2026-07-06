@@ -1,6 +1,6 @@
 {
   "iforest": {
-    "trained_at_utc": "2026-07-05T18:17:30+00:00",
+    "trained_at_utc": "2026-07-06T14:09:46+00:00",
     "components": [
       "bogie",
       "brakes",
@@ -15,31 +15,31 @@
       "contamination": 0.05
     },
     "metrics": {
-      "true_positives": 2,
-      "false_positives": 510,
-      "false_negatives": 1,
-      "true_negatives": 2211,
+      "true_positives": 1,
+      "false_positives": 239,
+      "false_negatives": 4,
+      "true_negatives": 2768,
       "precision": 0.004,
-      "recall": 0.667,
-      "false_alarm_rate": 0.187,
-      "early_life_false_alarm_rate": 0.082,
+      "recall": 0.2,
+      "false_alarm_rate": 0.079,
+      "early_life_false_alarm_rate": 0.049,
       "f1_score": 0.008,
-      "mean_detection_lead_time_cycles": 216.4,
-      "median_detection_lead_time_cycles": 215.0,
-      "units_flagged": 18,
-      "units_never_flagged": 6
+      "mean_detection_lead_time_cycles": 221.4,
+      "median_detection_lead_time_cycles": 246.5,
+      "units_flagged": 14,
+      "units_never_flagged": 10
     },
     "extra": {
       "thresholds": {
-        "bogie": 0.47773764929966017,
-        "brakes": 0.4859694602872048,
-        "engine": 0.6076359218788907,
-        "landing_gear": 0.4294216410207333
+        "bogie": 0.4588770152992049,
+        "brakes": 0.5413962192801961,
+        "engine": 0.6543494855196734,
+        "landing_gear": 0.4627397906049405
       }
     }
   },
   "rf": {
-    "trained_at_utc": "2026-07-05T18:17:31+00:00",
+    "trained_at_utc": "2026-07-06T14:09:47+00:00",
     "components": [
       "bogie",
       "brakes",
@@ -56,29 +56,29 @@
     },
     "metrics": {
       "overall": {
-        "MAE": 4.91,
-        "RMSE": 9.42
+        "MAE": 4.37,
+        "RMSE": 8.53
       },
       "by_component": {
         "bogie": {
-          "MAE": 8.1,
-          "RMSE": 14.37,
-          "n_rows": 517
+          "MAE": 3.65,
+          "RMSE": 5.97,
+          "n_rows": 600
         },
         "brakes": {
-          "MAE": 4.1,
-          "RMSE": 8.19,
-          "n_rows": 453
+          "MAE": 5.2,
+          "RMSE": 10.08,
+          "n_rows": 831
         },
         "engine": {
-          "MAE": 2.15,
-          "RMSE": 4.17,
-          "n_rows": 656
+          "MAE": 5.31,
+          "RMSE": 10.78,
+          "n_rows": 603
         },
         "landing_gear": {
-          "MAE": 5.4,
-          "RMSE": 9.22,
-          "n_rows": 1098
+          "MAE": 3.52,
+          "RMSE": 6.65,
+          "n_rows": 978
         }
       }
     },
